@@ -1,8 +1,8 @@
 package Repository;
 
 import Domain.Book;
-
 import java.util.*;
+
 
 public class RepoBook implements IRepoBook {
 
@@ -14,29 +14,29 @@ public class RepoBook implements IRepoBook {
 
     @Override
     public void addBook(Book book) throws IllegalArgumentException {
-        if (myStore==null){
-            throw new IllegalArgumentException("Store is empty!!!");
-        }else if(findBook(book.getId())==false){
+        if(findBook(book.getId())==null){
             myStore.add(book);
         }
         else
-            throw new IllegalArgumentException("There already exists a book with this id!!!");
+//            throw new IllegalArgumentException("There already exists a book with this id!!!");
+            System.out.println("There already exists a book with this id!!!");
     }
 
     @Override
-    public Book delBook(int id) {
-        return null;
+    public void delBook(int id) throws IllegalArgumentException {
+        Book book = findBook(id);
+        myStore.remove(book);
     }
 
     @Override
-    public Boolean findBook(int id) {
-        boolean findByID = false;
+    public Book findBook(int id) {
+        Book book=null;
         for (int i=0; i<myStore.size();i++) {
             if (myStore.get(i).getId() == id) {
-                findByID = true;
+                book=myStore.get(i);
             }
         }
-        return findByID;
+        return book;
     }
 
     @Override
@@ -45,7 +45,14 @@ public class RepoBook implements IRepoBook {
     }
 
     @Override
-    public Book updateBook(Book book) {
-        return null;
+    public Book updateBook(Book carte) {
+        Book book=findBook(carte.getId());
+
+        for (int i=0; i<myStore.size();i++) {
+            if (myStore.get(i)==book) {
+                myStore.set(i,carte);
+            }
+        }
+        return book;
     }
 }

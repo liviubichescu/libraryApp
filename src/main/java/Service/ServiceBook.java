@@ -16,8 +16,16 @@ public class ServiceBook {
         repoBook.addBook(book);
     }
 
+    public void removeBook(int bookId){
+        repoBook.delBook(bookId);
+    }
+
+    public void updateBookService(Book book) {
+        repoBook.updateBook(book);
+    }
+
+
     public ArrayList getAll(){
-        ArrayList<Book> array = this.repoBook.findAll();
-        return array;
+        return this.repoBook.findAll();
     }
 }

@@ -23,7 +23,7 @@ public interface IRepoBook {
      * @return - null if the book was deleted otherwise return the book;
      * @throws IllegalArgumentException if the given id is null.
      */
-    Book delBook(int id);
+    void delBook(int id);
 
     /**
      * Find the book with the given id
@@ -31,7 +31,7 @@ public interface IRepoBook {
      * @return the book with the given id.
      * @throws IllegalArgumentException if the given id is null.
      */
-    Boolean findBook(int id);
+    Book findBook(int id);
 
     /**
      * Finds all the books from the store;
