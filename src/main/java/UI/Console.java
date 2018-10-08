@@ -26,9 +26,9 @@ public class Console {
     private void adaugaCarte(){
 
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("Introduceti ID-ul cartii: ");
         int id = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Introduceti Titlul: ");
         String titlu = scanner.nextLine();

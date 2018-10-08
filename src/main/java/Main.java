@@ -23,9 +23,6 @@ public class Main {
 
         console.meniu();
 
-//        for (int i = 0; i<serviceBook.getAll().size(); i++){
-//            System.out.println(serviceBook.getAll().get(i));
-//        }
 
 
     }
