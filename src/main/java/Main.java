@@ -17,6 +17,8 @@ public class Main {
         Book book2 = new Book(2,"La tiganci","Mircea Eliade","Humanitas", 1985,20);
         Book book3 = new Book(3,"La tiganci","Mircea Eliade","Humanitas", 1985,20);
         Book book4 = new Book(4,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
+        Book book5 = new Book(4,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
+        Book book6 = new Book(4,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
 
         serviceBook.addBook(book);
         serviceBook.addBook(book2);
