@@ -19,14 +19,13 @@ public class Main {
         Book book4 = new Book(4,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
         Book book5 = new Book(4,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
         Book book6 = new Book(4,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
+        Book book7 = new Book(9,"Povestiri","Ion Creanga","Humanitas", 1990,15);
 
         serviceBook.addBook(book);
         serviceBook.addBook(book2);
         serviceBook.addBook(book3);
 
         console.meniu();
-
-
 
 
     }
