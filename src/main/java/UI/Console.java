@@ -1,15 +1,20 @@
 package UI;
 
 import Domain.Book;
+import Domain.Client;
 import Service.ServiceBook;
+import Service.ServiceClienti;
+
 import java.util.Scanner;
 
 public class Console {
 
-    ServiceBook serviceBook;
+    private ServiceBook serviceBook;
+    private ServiceClienti serviceClienti;
 
-    public Console(ServiceBook serviceBook){
+    public Console(ServiceBook serviceBook, ServiceClienti serviceClienti){
         this.serviceBook = serviceBook;
+        this.serviceClienti = serviceClienti;
     }
 
     private void printMeniu(){
@@ -17,7 +22,11 @@ public class Console {
         System.out.println("1. Adauga carte");
         System.out.println("2. Sterge carte");
         System.out.println("3. Update carte");
-        System.out.println("4. Afiseaza toate cartile");
+        System.out.println("4. Adauga client nou");
+        System.out.println("5. Sterge client");
+        System.out.println("6. Update client existent");
+        System.out.println("7. Afiseaza toate cartile");
+        System.out.println("8. Afiseaza toti clientii");
         System.out.println("0. Exit");
 
     }
@@ -88,6 +97,58 @@ public class Console {
         serviceBook.updateBookService(book);
     }
 
+    private void addClient(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Introduceti id-ul dorit: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Introduceti numele: ");
+        String nume = scanner.nextLine();
+
+        System.out.println("Introduceti prenumele: ");
+        String prenume = scanner.nextLine();
+
+        System.out.println("Introduceti varsta: ");
+        int age = scanner.nextInt();
+
+        Client client = new Client(id,nume,prenume,age);
+        serviceClienti.addClient(client);
+    }
+
+    private void deleteClient(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Introduceti ID-ul clientului: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        serviceClienti.deleteClient(id);
+    }
+
+    private void updateClient(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduceti id-ul clientului ce va fi modificat: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Introduceti numele nou: ");
+        String nume = scanner.nextLine();
+
+        System.out.println("Introduceti prenumele nou: ");
+        String prenume = scanner.nextLine();
+
+        System.out.println("Introduceti varsta noua: ");
+        int age = scanner.nextInt();
+
+        Client client = new Client(id, nume, prenume, age);
+        serviceClienti.updateClient(client);
+    }
+
+    private void printAllClients(){
+        serviceClienti.getAll().stream().forEach(System.out::println);
+    }
+
     public void meniu(){
         Scanner scanner = new Scanner(System.in);
         while(true){
@@ -106,7 +167,19 @@ public class Console {
                     updateBookConsole();
                     break;
                 case 4:
+                    addClient();
+                    break;
+                case 5:
+                    deleteClient();
+                    break;
+                case 6:
+                    updateClient();
+                    break;
+                case 7:
                     printAll();
+                    break;
+                case 8:
+                    printAllClients();
                     break;
                 default:
                     System.out.println("This option is not yet implemented");
