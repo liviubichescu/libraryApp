@@ -2,6 +2,10 @@ package Repository;
 import Domain.Book;
 import java.util.*;
 
+
+/*
+ * @author Liviu
+ */
 public class RepoBook implements IRepoBook {
 
     private ArrayList<Book> myStore;
@@ -12,12 +16,12 @@ public class RepoBook implements IRepoBook {
 
     @Override
     public void addBook(Book book) throws IllegalArgumentException {
+
         if(findBook(book.getId())==null){
             myStore.add(book);
         }
         else
-//            throw new IllegalArgumentException("There already exists a book with this id!!!");
-            System.out.println("There already exists a book with this id!!!");
+            throw new IllegalArgumentException("There already exists a book with this id!!!");
     }
 
     @Override
@@ -28,17 +32,25 @@ public class RepoBook implements IRepoBook {
 
     @Override
     public Book findBook(int id) {
+//          nu reusesc sa scriu un stream care sa imi returneze un obiect de tip book;
+//           streamul de mai joj imi face filtrarea dar imi returneaza un stream si nu un obiect de tip Book;
+
+//        myStore.stream()
+//                .filter(p->p.getId()==id)
+//                .forEach(System.out::println);
+
         Book book=null;
         for (int i=0; i<myStore.size();i++) {
             if (myStore.get(i).getId() == id) {
                 book=myStore.get(i);
             }
+
         }
         return book;
     }
 
     @Override
-    public ArrayList<Book> findAll() {
+    public List<Book> findAll() {
         return myStore;
     }
 

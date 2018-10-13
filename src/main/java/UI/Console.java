@@ -2,7 +2,6 @@ package UI;
 
 import Domain.Book;
 import Service.ServiceBook;
-
 import java.util.Scanner;
 
 public class Console {
@@ -60,9 +59,7 @@ public class Console {
     }
 
     private void printAll(){
-        for (int i = 0; i<serviceBook.getAll().size(); i++){
-            System.out.println(serviceBook.getAll().get(i));
-        }
+        serviceBook.getAll().stream().forEach(System.out::println);
     }
 
     private void updateBookConsole(){
@@ -118,7 +115,5 @@ public class Console {
 
 
     }
-
-
 
 }

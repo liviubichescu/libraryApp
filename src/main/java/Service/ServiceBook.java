@@ -3,6 +3,7 @@ package Service;
 import Domain.Book;
 import Repository.RepoBook;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceBook {
 
@@ -25,7 +26,7 @@ public class ServiceBook {
     }
 
 
-    public ArrayList getAll(){
+    public List getAll(){
         return this.repoBook.findAll();
     }
 }
