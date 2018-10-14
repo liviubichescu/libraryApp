@@ -18,15 +18,15 @@ public class Main {
         ServiceClienti serviceClienti = new ServiceClienti(repoClient);
         Console console = new Console(serviceBook, serviceClienti);
 
-        Book book = new Book(1,"Povestiri","Ion Creanga","Humanitas", 1990,15);
-        Book book2 = new Book(2,"La tiganci","Mircea Eliade","Humanitas", 1985,20);
-        Book book3 = new Book(3,"La tiganci","Mircea Eliade","Humanitas", 1985,20);
-        Book book4 = new Book(4,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
-        Book book5 = new Book(5,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
-        Book book6 = new Book(6,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
-        Book book7 = new Book(7,"Povestiri","Ion Creanga","Humanitas", 1990,15);
-        Client client1 = new Client(1,"Antonescu","Mihali", 22);
-        Client client2 = new Client(2,"Pupaza", "Marin", 55);
+        Book book = new Book(1L,"Povestiri","Ion Creanga","Humanitas", 1990,15);
+        Book book2 = new Book(2L,"La tiganci","Mircea Eliade","Humanitas", 1985,20);
+        Book book3 = new Book(3L,"La tiganci","Mircea Eliade","Humanitas", 1985,20);
+        Book book4 = new Book(4L,"Ana are mere", "Si pere", "De  masa" , 1990, 20);
+        Book book5 = new Book(5L,"Ana are mere", "Si pere", "De la masa" , 1990, 20);
+        Book book6 = new Book(6L,"Ana are mere", "Si pere", "De he masa" , 1990, 20);
+        Book book7 = new Book(7L,"Povestiri","Ion Creanga","Humanitas", 1990,15);
+        Client client1 = new Client(1L,"Antonescu","Mihali", 22);
+        Client client2 = new Client(2L,"Pupaza", "Marin", 55);
 
 
         serviceBook.addBook(book);
@@ -41,7 +41,6 @@ public class Main {
         serviceClienti.addClient(client2);
 
         console.meniu();
-        System.out.println(repoBook.findBook(7));
 
 
 

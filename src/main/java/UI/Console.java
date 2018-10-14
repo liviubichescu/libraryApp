@@ -35,7 +35,7 @@ public class Console {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Introduceti ID-ul cartii: ");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
 
         System.out.print("Introduceti Titlul: ");
@@ -61,21 +61,23 @@ public class Console {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Introduceti ID-ul cartii: ");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
 
         serviceBook.removeBook(id);
     }
 
     private void printAll(){
-        serviceBook.getAll().stream().forEach(System.out::println);
+        for (Book b:serviceBook.getAll()) {
+            System.out.println(b);
+        }
     }
 
     private void updateBookConsole(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Introduceti id-ul cartii pe care doriti sa o modificati: ");
-        int idCarte=scanner.nextInt();
+        Long idCarte = scanner.nextLong();
         scanner.nextLine();
 
         System.out.print("Introduceti Titlul: ");
@@ -101,7 +103,7 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Introduceti id-ul dorit: ");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
 
         System.out.println("Introduceti numele: ");
@@ -120,7 +122,7 @@ public class Console {
     private void deleteClient(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Introduceti ID-ul clientului: ");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
 
         serviceClienti.deleteClient(id);
@@ -129,7 +131,7 @@ public class Console {
     private void updateClient(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduceti id-ul clientului ce va fi modificat: ");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
 
         System.out.println("Introduceti numele nou: ");
@@ -146,7 +148,9 @@ public class Console {
     }
 
     private void printAllClients(){
-        serviceClienti.getAll().stream().forEach(System.out::println);
+        for (Client b:serviceClienti.getAll()) {
+            System.out.println(b);
+        }
     }
 
     public void meniu(){
