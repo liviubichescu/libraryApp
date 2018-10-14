@@ -2,17 +2,17 @@ package Repository;
 
 import Domain.Client;
 
-import java.util.List;
 
 public interface IRepoClient {
 
-    void addClient(Client client);
+    Client findClient(Long id);
 
-    void deleteClient(int id);
+    Iterable<Client> findAll();
 
-    Client findClient(int id);
+    Client save(Client entity);
 
-    List<Client> findAll();
+    Client delete(Long id);
 
-    Client updateClient(Client client);
+    Client update(Client entity);
+
 }

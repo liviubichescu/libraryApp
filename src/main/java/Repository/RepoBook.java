@@ -1,6 +1,7 @@
 package Repository;
 import Domain.Book;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /*
@@ -8,61 +9,43 @@ import java.util.*;
  */
 public class RepoBook implements IRepoBook {
 
-    private ArrayList<Book> myStore;
+    private Map<Long , Book> entities;
 
-    public RepoBook() {
-        this.myStore = new ArrayList<>();
+    public RepoBook(){
+        this.entities = new HashMap<>();
     }
 
     @Override
-    public void addBook(Book book) throws IllegalArgumentException {
+    public Book findBook(Long id){
+        throw new RuntimeException("Not implemented yes!");
+    }
 
-        if(findBook(book.getId())==null){
-            myStore.add(book);
+    @Override
+
+    public Iterable<Book> findAll(){
+        Set<Book> bookSet = entities.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toSet());
+        return bookSet;
+    }
+
+    @Override
+
+    public Book save(Book book){
+        if (book == null) {
+            throw new IllegalArgumentException("Entity must not be null.");
         }
-        else
-            throw new IllegalArgumentException("There already exists a book with this id!!!");
+
+        return entities.putIfAbsent(book.getId(), book);
     }
 
     @Override
-    public void delBook(int id) throws IllegalArgumentException {
-        Book book = findBook(id);
-        myStore.remove(book);
+
+    public Book delete(Long id){
+        throw new RuntimeException("not yet implemented");
     }
 
     @Override
-    public Book findBook(int id) {
-//          nu reusesc sa scriu un stream care sa imi returneze un obiect de tip book;
-//           streamul de mai joj imi face filtrarea dar imi returneaza un stream si nu un obiect de tip Book;
 
-//        myStore.stream()
-//                .filter(p->p.getId()==id)
-//                .forEach(System.out::println);
-
-        Book book=null;
-        for (int i=0; i<myStore.size();i++) {
-            if (myStore.get(i).getId() == id) {
-                book=myStore.get(i);
-            }
-
-        }
-        return book;
-    }
-
-    @Override
-    public List<Book> findAll() {
-        return myStore;
-    }
-
-    @Override
-    public Book updateBook(Book carte) {
-        Book book=findBook(carte.getId());
-
-        for (int i=0; i<myStore.size();i++) {
-            if (myStore.get(i)==book) {
-                myStore.set(i,carte);
-            }
-        }
-        return book;
+    public Book update(Book book){
+        throw new RuntimeException("not yet implemented");
     }
 }
