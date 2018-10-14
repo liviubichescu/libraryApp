@@ -41,6 +41,8 @@ public class Main {
         serviceClienti.addClient(client2);
 
         console.meniu();
+        System.out.println(repoBook.findBook(7));
+
 
 
     }

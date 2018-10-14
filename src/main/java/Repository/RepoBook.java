@@ -1,6 +1,7 @@
 package Repository;
 import Domain.Book;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /*
@@ -35,18 +36,20 @@ public class RepoBook implements IRepoBook {
 //          nu reusesc sa scriu un stream care sa imi returneze un obiect de tip book;
 //           streamul de mai joj imi face filtrarea dar imi returneaza un stream si nu un obiect de tip Book;
 
-//        myStore.stream()
-//                .filter(p->p.getId()==id)
+        List<Book> books = myStore.stream()
+                .filter(p->p.getId()==id)
+                .collect(Collectors.toList());
 //                .forEach(System.out::println);
 
-        Book book=null;
-        for (int i=0; i<myStore.size();i++) {
-            if (myStore.get(i).getId() == id) {
-                book=myStore.get(i);
-            }
-
-        }
-        return book;
+        return books.size()==0?null:books.get(0);
+//        Book book=null;
+//        for (int i=0; i<myStore.size();i++) {
+//            if (myStore.get(i).getId() == id) {
+//                book=myStore.get(i);
+//            }
+//
+//        }
+//        return book;
     }
 
     @Override

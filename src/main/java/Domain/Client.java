@@ -2,18 +2,16 @@ package Domain;
 
 import java.util.Objects;
 
-public class Client {
-    private int id;
+public class Client extends BaseEntity<Long> {
     private String Name;
     private String Surname;
     private int age;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Client(Long id, String name, String surname, int age) {
+        super(id);
+        this.Name = name;
+        this.Surname = surname;
+        this.age = age;
     }
 
     public String getName() {
@@ -40,36 +38,27 @@ public class Client {
         this.age = age;
     }
 
-    public Client(int id, String name, String surname, int age){
-        this.id = id;
-        this.Name = name;
-        this.Surname = surname;
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", Name='" + Name + '\'' +
-                ", Surname='" + Surname + '\'' +
-                ", age=" + age +
-                '}';
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Client)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return id == client.id &&
-                age == client.age &&
+        return age == client.age &&
                 Objects.equals(Name, client.Name) &&
                 Objects.equals(Surname, client.Surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, Name, Surname, age);
+        return Objects.hash(Name, Surname, age);
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "Name='" + Name + '\'' +
+                ", Surname='" + Surname + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

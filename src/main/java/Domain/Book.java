@@ -2,29 +2,20 @@ package Domain;
 
 import java.util.Objects;
 
-public class Book {
-    private int id;
+public class Book extends BaseEntity<Long>{
     private String title;
     private String author;
     private String publishHouse;
     private int relesedYear;
     private double price;
 
-    public Book(int id, String title, String author, String publishHouse, int relesedYear, double price) {
-        this.id = id;
+    public Book(Long id, String title, String author, String publishHouse, int relesedYear, double price) {
+        super(id);
         this.title = title;
         this.author = author;
         this.publishHouse = publishHouse;
         this.relesedYear = relesedYear;
         this.price = price;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -67,13 +58,24 @@ public class Book {
         this.price = price;
     }
 
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publishHouse='" + publishHouse + '\'' +
+                ", relesedYear=" + relesedYear +
+                ", price=" + price +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id &&
-                relesedYear == book.relesedYear &&
+        return relesedYear == book.relesedYear &&
                 Double.compare(book.price, price) == 0 &&
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
@@ -82,18 +84,6 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, publishHouse, relesedYear, price);
-    }
-
-    @Override
-    public String toString() {
-        return "Books in store {" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", publishHouse='" + publishHouse + '\'' +
-                ", relesedYear=" + relesedYear +
-                ", price=" + price +
-                '}';
+        return Objects.hash(title, author, publishHouse, relesedYear, price);
     }
 }
