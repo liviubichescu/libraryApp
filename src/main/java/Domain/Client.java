@@ -3,31 +3,31 @@ package Domain;
 import java.util.Objects;
 
 public class Client extends BaseEntity<Long> {
-    private String Name;
-    private String Surname;
+    private String name;
+    private String surname;
     private int age;
 
     public Client(Long id, String name, String surname, int age) {
         super(id);
-        this.Name = name;
-        this.Surname = surname;
+        this.name = name;
+        this.surname = surname;
         this.age = age;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        this.surname = surname;
     }
 
     public int getAge() {
@@ -44,20 +44,20 @@ public class Client extends BaseEntity<Long> {
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
         return age == client.age &&
-                Objects.equals(Name, client.Name) &&
-                Objects.equals(Surname, client.Surname);
+                Objects.equals(name, client.name) &&
+                Objects.equals(surname, client.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Name, Surname, age);
+        return Objects.hash(getId(), name, surname, age);
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "Name='" + Name + '\'' +
-                ", Surname='" + Surname + '\'' +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", age=" + age +
                 '}';
     }

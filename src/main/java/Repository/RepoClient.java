@@ -15,7 +15,10 @@ public class RepoClient implements IRepoClient {
 
     @Override
     public Client findClient(Long id){
-        throw new RuntimeException("Not implemented yes!");
+        if (entities.containsKey(id))
+            return entities.get(id);
+
+        throw new RuntimeException("The specified client does not exist!");
     }
 
     @Override
@@ -29,7 +32,7 @@ public class RepoClient implements IRepoClient {
 
     public Client save(Client client){
         if (client == null) {
-            throw new IllegalArgumentException("Entity must not be null.");
+            throw new IllegalArgumentException("Entity - client - must not be null.");
         }
 
         return entities.putIfAbsent(client.getId(), client);
@@ -38,13 +41,20 @@ public class RepoClient implements IRepoClient {
     @Override
 
     public Client delete(Long id){
-        throw new RuntimeException("not yet implemented");
+        if (entities.containsKey(id))
+            return entities.remove(id);
+
+        throw new RuntimeException("The specified client does not exists in database!!!");
     }
 
     @Override
 
     public Client update(Client client){
-        throw new RuntimeException("not yet implemented");
+        if (entities.containsKey(client.getId())){
+            entities.remove(client.getId());
+            return entities.put(client.getId(),client);
+        }
+        throw new RuntimeException("Update error: The specified client does not exists in database!!!");
     }
 
 }

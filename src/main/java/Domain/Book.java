@@ -84,6 +84,6 @@ public class Book extends BaseEntity<Long>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, author, publishHouse, relesedYear, price);
+        return Objects.hash(getId(),title, author, publishHouse, relesedYear, price);
     }
 }
