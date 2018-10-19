@@ -1,0 +1,9 @@
+1,Povestiri,Ion Creanga,Humanitas,1990,15
+2,La tiganci,Mircea Eliade,Litera,1985,20
+3,Baltagul,Mihail Sadoveanu,Limes,1985,20
+4,Valea Frumoasei,Mihail Sadoveanu,ALL,1990,20
+5,Ultima noapte de dragoste - intaia noapte de razboi,Liviu Rebreanu,Corint ,1983,20
+6,Poezii celebre,Mihai Eminescu,ART ,1989,20
+7,Poezii si proza,George Cosbuc,Presa,1979,158
+30,dasdasd,asdasdas,adssd,3020,30.0
+50,dasdasda,sda,sd,45,30.0

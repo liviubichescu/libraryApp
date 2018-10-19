@@ -1,33 +1,40 @@
 package Service;
 
 import Domain.Client;
-import Repository.IRepoClient;
-import Repository.RepoClient;
-
-import java.util.List;
+import Domain.Validators.ValidatorException;
+import Repository.Repository;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class ServiceClienti {
 
-    private IRepoClient repoClient;
+    private Repository<Long, Client> repository;
 
-    public ServiceClienti(RepoClient repoClient) {
-        this.repoClient = repoClient;
+    public ServiceClienti(Repository<Long, Client> repository) {
+        this.repository = repository;
     }
 
-    public void addClient(Client client){
-        repoClient.save(client);
+    public void addClient(Client client)throws ValidatorException {
+        repository.save(client);
     }
 
-    public void deleteClient(Long Id){
-        repoClient.delete(Id);
+    public Set<Client> getAllClients() {
+        Iterable<Client> clients = repository.findAll();
+        return StreamSupport.stream(clients.spliterator(), false).collect(Collectors.toSet());
     }
 
-    public void updateClient(Client client) {
-        repoClient.update(client);
+    public Set<Client> filterClientsByName(String s) {
+        Iterable<Client> clients = repository.findAll();
+        Set<Client> filteredClients = new HashSet<>();
+        clients.forEach(filteredClients::add);
+        filteredClients.removeIf(client -> !client.getName().contains(s));
+
+        return filteredClients;
     }
 
-
-    public Iterable<Client> getAll(){
-        return this.repoClient.findAll();
+    public void removeClient(Long clientId){
+        repository.delete(clientId);
     }
 }
