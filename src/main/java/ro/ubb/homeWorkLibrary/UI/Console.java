@@ -1,9 +1,9 @@
-package UI;
+package ro.ubb.homeWorkLibrary.UI;
 
-import Domain.Book;
-import Domain.Client;
-import Service.ServiceBook;
-import Service.ServiceClienti;
+import ro.ubb.homeWorkLibrary.Domain.Book;
+import ro.ubb.homeWorkLibrary.Domain.Client;
+import ro.ubb.homeWorkLibrary.Service.ServiceBook;
+import ro.ubb.homeWorkLibrary.Service.ServiceClienti;
 
 import java.util.Scanner;
 
@@ -23,9 +23,10 @@ public class Console {
         System.out.println("1. Adauga carte");
         System.out.println("2. Sterge carte");
         System.out.println("3. Adauga client nou");
+        System.out.println("4. Sterge client");
         System.out.println("4. Afiseaza toate cartile");
-        System.out.println("5. Afiseaza toti clientii");
-        System.out.println("6. Filtreaza dupa autor");
+        System.out.println("6. Afiseaza toti clientii");
+        System.out.println("7. Filtreaza dupa autor");
         System.out.println("0. Exit");
 
     }
@@ -53,7 +54,14 @@ public class Console {
         double pret = scanner.nextDouble();
 
         Book book = new Book(id,titlu,autor,editura,an,pret);
-        serviceBook.addBook(book);
+
+//        try {
+            serviceBook.addBook(book);
+//        }
+//        catch (ProjectException be){
+//            be.getCause();
+//        }
+
     }
 
     private void adaugaClient(){
@@ -87,6 +95,15 @@ public class Console {
         serviceBook.removeBook(id);
     }
 
+    private void stergeClient() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Introduceti ID-ul clientului: ");
+        Long id = scanner.nextLong();
+        scanner.nextLine();
+
+        serviceClienti.removeClient(id);
+    }
 
     private void printAllBooks(){
         for (Book b:serviceBook.getAllBooks()) {
@@ -130,12 +147,15 @@ public class Console {
                     adaugaClient();
                     break;
                 case 4:
-                    printAllBooks();
+                    stergeClient();
                     break;
                 case 5:
-                    printAllClients();
+                    printAllBooks();
                     break;
                 case 6:
+                    printAllClients();
+                    break;
+                case 7:
                     filterByAuthor();
                     break;
                 default:

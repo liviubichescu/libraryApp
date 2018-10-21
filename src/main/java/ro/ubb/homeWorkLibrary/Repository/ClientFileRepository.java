@@ -1,9 +1,10 @@
-package Repository;
+package ro.ubb.homeWorkLibrary.Repository;
 
-import Domain.Client;
-import Domain.Validators.Validator;
-import Domain.Validators.ValidatorException;
+import ro.ubb.homeWorkLibrary.Domain.Client;
+import ro.ubb.homeWorkLibrary.Validators.Validator;
+import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +13,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ClientFileRepository extends InMemoryRepository<Long, Client> {
 
@@ -70,6 +72,28 @@ public class ClientFileRepository extends InMemoryRepository<Long, Client> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Optional<Client> delete(Long id) {
+
+        File file = new File("./data/clients.txt");
+
+        List<String> out = null;
+        try {
+            out = Files.lines(file.toPath())
+                    .filter(line -> !line.contains(id.toString()))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return Optional.empty();
     }
 
     @Override

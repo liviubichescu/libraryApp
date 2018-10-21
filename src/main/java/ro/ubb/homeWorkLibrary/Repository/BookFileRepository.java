@@ -1,7 +1,7 @@
-package Repository;
-import Domain.Book;
-import Domain.Validators.Validator;
-import Domain.Validators.ValidatorException;
+package ro.ubb.homeWorkLibrary.Repository;
+import ro.ubb.homeWorkLibrary.Domain.Book;
+import ro.ubb.homeWorkLibrary.Validators.Validator;
+import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,7 +1,7 @@
-package Repository;
+package ro.ubb.homeWorkLibrary.Repository;
 
-import Domain.BaseEntity;
-import Domain.Validators.ValidatorException;
+import ro.ubb.homeWorkLibrary.Domain.BaseEntity;
+import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
 import java.util.Optional;
 
 /**

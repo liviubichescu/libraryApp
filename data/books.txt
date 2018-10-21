@@ -2,5 +2,5 @@
 2,La tiganci,Mircea Eliade,Litera,1985,20
 3,Baltagul,Mihail Sadoveanu,Limes,1985,20
 4,Valea Frumoasei,Mihail Sadoveanu,ALL,1990,20
-5,Ultima noapte de dragoste - intaia noapte de razboi,Liviu Rebreanu,Corint ,1983,20
+5,Ultima noapte de dragoste intaia noapte de razboi,Liviu Rebreanu,Corint ,1983,20
 6,Poezii celebre,Mihai Eminescu,ART ,1989,20

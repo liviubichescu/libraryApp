@@ -1,6 +1,6 @@
-package Domain.Validators;
+package ro.ubb.homeWorkLibrary.Exceptions;
 
-public class ValidatorException extends CatalogException {
+public class ValidatorException extends ProjectException {
 
     public ValidatorException(String message) {
         super(message);

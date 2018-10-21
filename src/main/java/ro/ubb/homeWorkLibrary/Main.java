@@ -1,15 +1,16 @@
-import Domain.Book;
-import Domain.Client;
-import Domain.Validators.BookValidator;
-import Domain.Validators.ClientValidator;
-import Domain.Validators.Validator;
-import Repository.InMemoryRepository;
-import Repository.Repository;
-import Repository.BookFileRepository;
-import Repository.ClientFileRepository;
-import Service.ServiceBook;
-import Service.ServiceClienti;
-import UI.Console;
+package ro.ubb.homeWorkLibrary;
+
+import ro.ubb.homeWorkLibrary.Domain.Book;
+import ro.ubb.homeWorkLibrary.Domain.Client;
+import ro.ubb.homeWorkLibrary.Validators.BookValidator;
+import ro.ubb.homeWorkLibrary.Validators.ClientValidator;
+import ro.ubb.homeWorkLibrary.Validators.Validator;
+import ro.ubb.homeWorkLibrary.Repository.Repository;
+import ro.ubb.homeWorkLibrary.Repository.BookFileRepository;
+import ro.ubb.homeWorkLibrary.Repository.ClientFileRepository;
+import ro.ubb.homeWorkLibrary.Service.ServiceBook;
+import ro.ubb.homeWorkLibrary.Service.ServiceClienti;
+import ro.ubb.homeWorkLibrary.UI.Console;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,8 +23,8 @@ public class Main {
 
 //        Validator<Book> validatorBook = new BookValidator();
 //        Validator<Client> clientValidator = new ClientValidator();
-//        Repository<Long, Book> bookRepository = new InMemoryRepository<>(validatorBook);
-//        Repository<Long, Client> clientRepository = new InMemoryRepository<>(clientValidator);
+//        ro.ubb.homeWorkLibrary.Repository<Long, Book> bookRepository = new InMemoryRepository<>(validatorBook);
+//        ro.ubb.homeWorkLibrary.Repository<Long, Client> clientRepository = new InMemoryRepository<>(clientValidator);
 //        ServiceBook serviceBook = new ServiceBook(bookRepository);
 //        ServiceClienti serviceClienti = new ServiceClienti(clientRepository);
 //        Console console = new Console(serviceBook, serviceClienti);
@@ -49,6 +50,9 @@ public class Main {
 //        serviceBook.addBook(book6);
 //        serviceBook.addBook(book7);
 //        console.meniu();
+
+
+
         /* file repo */
         try {
             System.out.println(new File(".").getCanonicalPath());

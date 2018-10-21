@@ -1,8 +1,8 @@
-package Service;
+package ro.ubb.homeWorkLibrary.Service;
 
-import Domain.Book;
-import Domain.Validators.ValidatorException;
-import Repository.Repository;
+import ro.ubb.homeWorkLibrary.Domain.Book;
+import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
+import ro.ubb.homeWorkLibrary.Repository.Repository;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;

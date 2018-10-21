@@ -1,4 +1,4 @@
-package Domain;
+package ro.ubb.homeWorkLibrary.Domain;
 
 public class BaseEntity<ID>{
 

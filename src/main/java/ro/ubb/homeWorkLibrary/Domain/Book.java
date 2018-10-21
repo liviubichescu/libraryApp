@@ -1,4 +1,4 @@
-package Domain;
+package ro.ubb.homeWorkLibrary.Domain;
 
 import java.util.Objects;
 
@@ -62,6 +62,7 @@ public class Book extends BaseEntity<Long>{
     @Override
     public String toString() {
         return "Book{" +
+                "id='" + super.getId() + '\'' +
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publishHouse='" + publishHouse + '\'' +

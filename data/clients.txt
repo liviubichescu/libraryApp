@@ -1,5 +1,1 @@
-1,Ion,Avadanii,56
-2,Marius,Parpaliu,50
 3,Ciprian,Vasiliu,32
-4,Cornel,Darie,45
-5,sasdasd,asdsadssssssssssssss,6

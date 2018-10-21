@@ -1,8 +1,8 @@
-package Repository;
+package ro.ubb.homeWorkLibrary.Repository;
 
-import Domain.BaseEntity;
-import Domain.Validators.Validator;
-import Domain.Validators.ValidatorException;
+import ro.ubb.homeWorkLibrary.Domain.BaseEntity;
+import ro.ubb.homeWorkLibrary.Validators.Validator;
+import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -35,6 +35,7 @@ public class InMemoryRepository<ID, Entities extends BaseEntity<ID>> implements 
         Set<Entities> allEntities = entities.entrySet().stream().map(entry -> entry.getValue()).collect(Collectors.toSet());
         return allEntities;
     }
+
 
     @Override
     public Optional<Entities> save(Entities entity) throws ValidatorException {

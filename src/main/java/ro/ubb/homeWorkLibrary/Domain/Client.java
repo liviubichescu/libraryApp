@@ -1,4 +1,4 @@
-package Domain;
+package ro.ubb.homeWorkLibrary.Domain;
 
 import java.util.Objects;
 
@@ -56,6 +56,7 @@ public class Client extends BaseEntity<Long> {
     @Override
     public String toString() {
         return "Client{" +
+                "id='" + super.getId() + '\'' +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
