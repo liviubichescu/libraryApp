@@ -4,6 +4,9 @@ public class BaseEntity<ID>{
 
     private ID id;
 
+    public BaseEntity() {
+    }
+
     BaseEntity(ID id) {
         this.id = id;
     }

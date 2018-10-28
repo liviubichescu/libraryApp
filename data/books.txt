@@ -4,3 +4,5 @@
 4,Valea Frumoasei,Mihail Sadoveanu,ALL,1990,20
 5,Ultima noapte de dragoste intaia noapte de razboi,Liviu Rebreanu,Corint ,1983,20
 6,Poezii celebre,Mihai Eminescu,ART ,1989,20
+30,sdfsdf,dfffffffffffffffffffffff,ffffffffffsssssssssssssssssss,55,33.0
+23,dasdasd,asdas,asdas,2000,30.0

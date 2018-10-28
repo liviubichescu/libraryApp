@@ -2,9 +2,13 @@ package ro.ubb.homeWorkLibrary.UI;
 
 import ro.ubb.homeWorkLibrary.Domain.Book;
 import ro.ubb.homeWorkLibrary.Domain.Client;
+import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
 import ro.ubb.homeWorkLibrary.Service.ServiceBook;
 import ro.ubb.homeWorkLibrary.Service.ServiceClienti;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Console {
@@ -24,7 +28,7 @@ public class Console {
         System.out.println("2. Sterge carte");
         System.out.println("3. Adauga client nou");
         System.out.println("4. Sterge client");
-        System.out.println("4. Afiseaza toate cartile");
+        System.out.println("5. Afiseaza toate cartile");
         System.out.println("6. Afiseaza toti clientii");
         System.out.println("7. Filtreaza dupa autor");
         System.out.println("0. Exit");
@@ -55,13 +59,9 @@ public class Console {
 
         Book book = new Book(id,titlu,autor,editura,an,pret);
 
-//        try {
-            serviceBook.addBook(book);
-//        }
-//        catch (ProjectException be){
-//            be.getCause();
-//        }
+        serviceBook.addBook(book);
 
+//        addBooks();
     }
 
     private void adaugaClient(){
@@ -83,7 +83,6 @@ public class Console {
         Client client = new Client(id, nume, prenume, varsta);
         serviceClienti.addClient(client);
     }
-
 
     private void stergeCarte() {
 
@@ -117,6 +116,42 @@ public class Console {
         }
     }
 
+
+    private void addBooks() {
+        while (true) {
+            Book book = readBook();
+            if (book == null || book.getId() < 0) {
+                break;
+            }
+            try {
+                serviceBook.addBook(book);
+            } catch (ValidatorException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private Book readBook() {
+        System.out.println("Read book {id, Titlu, autor, editura, an, pret}");
+
+        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            Long id = Long.valueOf(bufferRead.readLine());
+            String titlu = bufferRead.readLine();
+            String autor = bufferRead.readLine();
+            String editura = bufferRead.readLine();
+            int an = Integer.parseInt(bufferRead.readLine());
+            long pret = Long.parseLong(bufferRead.readLine());
+
+            Book book = new Book(id,titlu,autor,editura,an,pret);
+            book.setId(id);
+
+            return book;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
 
     private void filterByAuthor(){

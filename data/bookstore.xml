@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bookstore>
+        
+    <book id="666">
+                
+        <id>666</id>
+                
+        <title>asdasda</title>
+                
+        <author>asdasd</author>
+                
+        <publishHouse>asd</publishHouse>
+                
+        <year>566</year>
+                
+        <price>333.0</price>
+            
+    </book>
+    
+    <book id="555">
+        <id>555</id>
+        <title>adasdasd</title>
+        <author>saasdasdas</author>
+        <publishHouse>asd</publishHouse>
+        <year>33</year>
+        <price>66.0</price>
+    </book>
+</bookstore>

@@ -2,17 +2,20 @@ package ro.ubb.homeWorkLibrary;
 
 import ro.ubb.homeWorkLibrary.Domain.Book;
 import ro.ubb.homeWorkLibrary.Domain.Client;
-import ro.ubb.homeWorkLibrary.Validators.BookValidator;
-import ro.ubb.homeWorkLibrary.Validators.ClientValidator;
-import ro.ubb.homeWorkLibrary.Validators.Validator;
 import ro.ubb.homeWorkLibrary.Repository.Repository;
 import ro.ubb.homeWorkLibrary.Repository.BookFileRepository;
 import ro.ubb.homeWorkLibrary.Repository.ClientFileRepository;
+import ro.ubb.homeWorkLibrary.Repository.XmlFileRepository;
 import ro.ubb.homeWorkLibrary.Service.ServiceBook;
 import ro.ubb.homeWorkLibrary.Service.ServiceClienti;
 import ro.ubb.homeWorkLibrary.UI.Console;
+import ro.ubb.homeWorkLibrary.Validators.BookValidator;
+import ro.ubb.homeWorkLibrary.Validators.ClientValidator;
+import ro.ubb.homeWorkLibrary.Validators.Validator;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /*
 created by Liviu
@@ -52,18 +55,28 @@ public class Main {
 //        console.meniu();
 
 
-
-        /* file repo */
-        try {
-            System.out.println(new File(".").getCanonicalPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//
+//        /* file repo */
+//        try {
+//            System.out.println(new File(".").getCanonicalPath());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         /* in file repo */
+//        Validator<Book> bookValidator = new BookValidator();
+//        Validator<Client> clientValidator = new ClientValidator();
+//        Repository<Long, Book> bookRepository = new BookFileRepository(bookValidator, "./data/books.txt");
+//        Repository<Long, Client> clientRepository = new ClientFileRepository(clientValidator, "./data/clients.txt");
+//        ServiceBook serviceBook2 = new ServiceBook(bookRepository);
+//        ServiceClienti serviceClienti2 = new ServiceClienti(clientRepository);
+//        Console console2 = new Console(serviceBook2, serviceClienti2);
+//        console2.meniu();
+//
+
         Validator<Book> bookValidator = new BookValidator();
         Validator<Client> clientValidator = new ClientValidator();
-        Repository<Long, Book> bookRepository = new BookFileRepository(bookValidator, "./data/books.txt");
+        Repository<Long, Book> bookRepository = new XmlFileRepository(bookValidator, "./data/bookstore.xml");
         Repository<Long, Client> clientRepository = new ClientFileRepository(clientValidator, "./data/clients.txt");
         ServiceBook serviceBook2 = new ServiceBook(bookRepository);
         ServiceClienti serviceClienti2 = new ServiceClienti(clientRepository);
@@ -71,6 +84,14 @@ public class Main {
         console2.meniu();
 
 
+
+//        List<Book> books = loadBooks();
+//        books.forEach(System.out::println);
+//
+//        Book book = new Book("c1", "t1", "a1", 2018, 50);
+//        saveData(book);
+//
+//        System.out.println("bye");
 
     }
 }

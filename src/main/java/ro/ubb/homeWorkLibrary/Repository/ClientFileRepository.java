@@ -77,24 +77,40 @@ public class ClientFileRepository extends InMemoryRepository<Long, Client> {
     @Override
     public Optional<Client> delete(Long id) {
 
-        File file = new File("./data/clients.txt");
-
         List<String> out = null;
+
         try {
-            out = Files.lines(file.toPath())
-                    .filter(line -> !line.contains(id.toString()))
+            out = Files.lines(Paths.get(fileName))
+                    .filter(line -> {
+                        List<String> items = Arrays.asList(line.split(","));
+                        if (!items.get(0).equals(id.toString())){
+                            return true;
+                        }
+                        return false;})
                     .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(Paths.get(fileName), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
+        super.delete(id);
         return Optional.empty();
     }
+
+//    public Optional<Client> deleteFromFile(Long id) throws ValidatorException {
+//        Optional<Client> optional = super.delete(id);
+//        if (optional.isPresent()) {
+//            return optional;
+//        }
+//        delete(id);
+//        return Optional.empty();
+//    }
+
 
     @Override
     public Optional<Client> findOne(Long clientID) {

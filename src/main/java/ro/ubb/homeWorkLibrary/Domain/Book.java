@@ -9,6 +9,8 @@ public class Book extends BaseEntity<Long>{
     private int relesedYear;
     private double price;
 
+    public Book() {
+    }
     public Book(Long id, String title, String author, String publishHouse, int relesedYear, double price) {
         super(id);
         this.title = title;
@@ -62,8 +64,8 @@ public class Book extends BaseEntity<Long>{
     @Override
     public String toString() {
         return "Book{" +
-                "id='" + super.getId() + '\'' +
-                "title='" + title + '\'' +
+                " id =' " + super.getId()+ '\'' +
+                ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publishHouse='" + publishHouse + '\'' +
                 ", relesedYear=" + relesedYear +
