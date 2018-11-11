@@ -1,4 +1,4 @@
-package ro.ubb.homeWorkLibrary.Domain;
+package ro.ubb.homeWorkLibrary.domain;
 
 import java.util.Objects;
 
@@ -11,6 +11,7 @@ public class Book extends BaseEntity<Long>{
 
     public Book() {
     }
+
     public Book(Long id, String title, String author, String publishHouse, int relesedYear, double price) {
         super(id);
         this.title = title;
@@ -64,7 +65,7 @@ public class Book extends BaseEntity<Long>{
     @Override
     public String toString() {
         return "Book{" +
-                " id =' " + super.getId()+ '\'' +
+                " id ='" + super.getId()+ '\'' +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publishHouse='" + publishHouse + '\'' +

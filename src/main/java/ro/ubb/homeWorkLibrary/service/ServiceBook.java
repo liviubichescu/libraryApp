@@ -1,8 +1,7 @@
-package ro.ubb.homeWorkLibrary.Service;
+package ro.ubb.homeWorkLibrary.service;
 
-import ro.ubb.homeWorkLibrary.Domain.Book;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
-import ro.ubb.homeWorkLibrary.Repository.Repository;
+import ro.ubb.homeWorkLibrary.domain.Book;
+import ro.ubb.homeWorkLibrary.repository.Repository;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,22 +15,18 @@ public class ServiceBook {
         this.repository = repository;
     }
 
-    public void addBook(Book book)throws ValidatorException {
+    public void addBook(Book book){
         repository.save(book);
     }
 
-    public Set<Book> getAllBooks() {
+    public Set<Book> getAllBooks(){
         Iterable<Book> books = repository.findAll();
         return StreamSupport.stream(books.spliterator(), false).collect(Collectors.toSet());
     }
 
-    public Set<Book> filterBooksByName(String s) {
+    public Set<Book> filterBooksByName(String s){
         Iterable<Book> books = repository.findAll();
-        //version 1
-//        Set<Student> filteredStudents = StreamSupport.stream(students.spliterator(), false)
-//                .filter(student -> student.getName().contains(s)).collect(Collectors.toSet());
 
-        //version 2
         Set<Book> filteredBooks = new HashSet<>();
         books.forEach(filteredBooks::add);
         filteredBooks.removeIf(book -> !book.getAuthor().contains(s));
@@ -43,13 +38,19 @@ public class ServiceBook {
         repository.delete(bookId);
     }
 
-//
-//    public void updateBookService(Book book) {
-//        repoBook.update(book);
-//    }
-//
-//
-//    public Iterable<Book> getAll(){
-//        return this.repoBook.findAll();
-//    }
+
+    public void updateBookService(Book book){
+        repository.update(book);
+    }
+
+    public Set<Book> findBook(Long id){
+        Iterable<Book> books = repository.findAll();
+
+        Set<Book> filteredBooks = new HashSet<>();
+        books.forEach(filteredBooks::add);
+        filteredBooks.removeIf(book -> book.getId() != id);
+
+        return filteredBooks;
+    }
+
 }

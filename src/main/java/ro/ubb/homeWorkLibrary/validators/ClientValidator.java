@@ -1,7 +1,7 @@
-package ro.ubb.homeWorkLibrary.Validators;
+package ro.ubb.homeWorkLibrary.validators;
 
-import ro.ubb.homeWorkLibrary.Domain.Client;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
+import ro.ubb.homeWorkLibrary.domain.Client;
+import ro.ubb.homeWorkLibrary.exceptions.ValidatorException;
 
 public class ClientValidator implements Validator<Client> {
     @Override

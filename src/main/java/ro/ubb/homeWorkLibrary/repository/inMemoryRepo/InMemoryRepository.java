@@ -1,8 +1,9 @@
-package ro.ubb.homeWorkLibrary.Repository;
+package ro.ubb.homeWorkLibrary.repository.inMemoryRepo;
 
-import ro.ubb.homeWorkLibrary.Domain.BaseEntity;
-import ro.ubb.homeWorkLibrary.Validators.Validator;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
+import ro.ubb.homeWorkLibrary.domain.BaseEntity;
+import ro.ubb.homeWorkLibrary.repository.Repository;
+import ro.ubb.homeWorkLibrary.validators.Validator;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class InMemoryRepository<ID, Entities extends BaseEntity<ID>> implements 
     }
 
     @Override
-    public Optional<Entities> findOne(ID id) {
+    public Optional<Entities> findOne(ID id){
         if (id == null) {
             throw new IllegalArgumentException("id must not be null");
         }
@@ -31,14 +32,14 @@ public class InMemoryRepository<ID, Entities extends BaseEntity<ID>> implements 
     }
 
     @Override
-    public Iterable<Entities> findAll() {
+    public Iterable<Entities> findAll(){
         Set<Entities> allEntities = entities.entrySet().stream().map(entry -> entry.getValue()).collect(Collectors.toSet());
         return allEntities;
     }
 
 
     @Override
-    public Optional<Entities> save(Entities entity) throws ValidatorException {
+    public Optional<Entities> save(Entities entity)  {
         if (entity == null) {
             throw new IllegalArgumentException("ID must not be null");
         }
@@ -47,7 +48,7 @@ public class InMemoryRepository<ID, Entities extends BaseEntity<ID>> implements 
     }
 
     @Override
-    public Optional<Entities> delete(ID id) {
+    public Optional<Entities> delete(ID id)  {
         if (id == null) {
             throw new IllegalArgumentException("ID is either null or not in the list!");
         }
@@ -55,7 +56,7 @@ public class InMemoryRepository<ID, Entities extends BaseEntity<ID>> implements 
     }
 
     @Override
-    public Optional<Entities> update(Entities entity) throws ValidatorException {
+    public Optional<Entities> update(Entities entity) {
         if (entity == null) {
             throw new IllegalArgumentException("entity must not be null");
         }

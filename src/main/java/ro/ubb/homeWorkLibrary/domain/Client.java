@@ -1,4 +1,4 @@
-package ro.ubb.homeWorkLibrary.Domain;
+package ro.ubb.homeWorkLibrary.domain;
 
 import java.util.Objects;
 
@@ -57,9 +57,10 @@ public class Client extends BaseEntity<Long> {
     public String toString() {
         return "Client{" +
                 "id='" + super.getId() + '\'' +
-                "name='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
                 '}';
     }
+
 }

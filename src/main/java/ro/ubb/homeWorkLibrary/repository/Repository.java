@@ -1,7 +1,7 @@
-package ro.ubb.homeWorkLibrary.Repository;
+package ro.ubb.homeWorkLibrary.repository;
 
-import ro.ubb.homeWorkLibrary.Domain.BaseEntity;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
+import ro.ubb.homeWorkLibrary.domain.BaseEntity;
+import ro.ubb.homeWorkLibrary.exceptions.ValidatorException;
 import java.util.Optional;
 
 /**
@@ -18,7 +18,7 @@ public interface Repository<ID, Entities extends BaseEntity<ID>> {
      * @throws IllegalArgumentException if the given entity is null.
      * @throws ValidatorException if the entity is not valid.
      */
-    Optional<Entities> save(Entities entity) throws ValidatorException;
+    Optional<Entities> save(Entities entity);
 
     /**
      * Removes the entity with the given id.
@@ -48,5 +48,5 @@ public interface Repository<ID, Entities extends BaseEntity<ID>> {
      * @throws IllegalArgumentException if the given entity is null.
      * @throws ValidatorException if the entity is not valid.
      */
-    Optional<Entities> update(Entities entity) throws ValidatorException;
+    Optional<Entities> update(Entities entity);
 }

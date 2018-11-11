@@ -1,13 +1,13 @@
-package ro.ubb.homeWorkLibrary.Repository;
+package ro.ubb.homeWorkLibrary.repository;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import ro.ubb.homeWorkLibrary.Domain.Book;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
-import ro.ubb.homeWorkLibrary.Validators.Validator;
+import ro.ubb.homeWorkLibrary.domain.Book;
+import ro.ubb.homeWorkLibrary.repository.inMemoryRepo.InMemoryRepository;
+import ro.ubb.homeWorkLibrary.validators.Validator;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
@@ -15,8 +15,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class XmlFileRepository extends InMemoryRepository<Long, Book> {
@@ -32,7 +30,7 @@ public class XmlFileRepository extends InMemoryRepository<Long, Book> {
 
 
     @Override
-    public Optional<Book> save(Book entity) throws ValidatorException {
+    public Optional<Book> save(Book entity) {
         Optional<Book> optional = super.save(entity);
         if (optional.isPresent()) {
             return optional;
@@ -40,6 +38,8 @@ public class XmlFileRepository extends InMemoryRepository<Long, Book> {
         saveToXml(entity);
         return Optional.empty();
     }
+
+
 
     private void saveToXml(Book book) {
         try {
@@ -164,7 +164,6 @@ public class XmlFileRepository extends InMemoryRepository<Long, Book> {
                 }
             }
 
-
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -172,15 +171,7 @@ public class XmlFileRepository extends InMemoryRepository<Long, Book> {
             transformer.transform(new DOMSource(document),
                     new StreamResult(new File(fileName)));
 
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
+        } catch (SAXException | ParserConfigurationException | IOException | TransformerException e) {
             e.printStackTrace();
         }
 

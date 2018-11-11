@@ -1,7 +1,10 @@
-package ro.ubb.homeWorkLibrary.Repository;
-import ro.ubb.homeWorkLibrary.Domain.Book;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
-import ro.ubb.homeWorkLibrary.Validators.Validator;
+package ro.ubb.homeWorkLibrary.repository.fileRepo;
+
+import ro.ubb.homeWorkLibrary.domain.Book;
+import ro.ubb.homeWorkLibrary.exceptions.ValidatorException;
+import ro.ubb.homeWorkLibrary.repository.inMemoryRepo.InMemoryRepository;
+import ro.ubb.homeWorkLibrary.validators.Validator;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +46,7 @@ public class BookFileRepository extends InMemoryRepository<Long, Book> {
                 int relesedYear = Integer.parseInt(items.get(4));
                 double price = Double.parseDouble(items.get(5));
 
-                Book book = new Book(id,title,author,publishHouse,relesedYear,price);
+                Book book = new Book(id, title, author, publishHouse, relesedYear, price);
                 book.setId(id);
 
                 try {
@@ -59,7 +62,7 @@ public class BookFileRepository extends InMemoryRepository<Long, Book> {
 
 
     @Override
-    public Optional<Book> save(Book entity) throws ValidatorException {
+    public Optional<Book> save(Book entity) {
         Optional<Book> optional = super.save(entity);
         if (optional.isPresent()) {
             return optional;
@@ -73,7 +76,7 @@ public class BookFileRepository extends InMemoryRepository<Long, Book> {
 
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
             bufferedWriter.write(
-                    entity.getId() + "," + entity.getTitle() + "," + entity.getAuthor() + "," + entity.getPublishHouse()+ "," + entity.getRelesedYear()+ "," + entity.getPrice());
+                    entity.getId() + "," + entity.getTitle() + "," + entity.getAuthor() + "," + entity.getPublishHouse() + "," + entity.getRelesedYear() + "," + entity.getPrice());
             bufferedWriter.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,9 +107,8 @@ public class BookFileRepository extends InMemoryRepository<Long, Book> {
 
 
     @Override
-    public Optional<Book> findOne(Long aLong) {
-
-        return super.findOne(aLong);
+    public Optional<Book> findOne(Long id) {
+        return super.findOne(id);
     }
 
 }

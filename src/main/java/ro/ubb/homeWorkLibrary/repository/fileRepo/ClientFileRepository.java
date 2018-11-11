@@ -1,10 +1,12 @@
-package ro.ubb.homeWorkLibrary.Repository;
+package ro.ubb.homeWorkLibrary.repository.fileRepo;
 
-import ro.ubb.homeWorkLibrary.Domain.Client;
-import ro.ubb.homeWorkLibrary.Validators.Validator;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
+import ro.ubb.homeWorkLibrary.domain.Client;
+import ro.ubb.homeWorkLibrary.exceptions.DatabaseException;
+import ro.ubb.homeWorkLibrary.repository.inMemoryRepo.InMemoryRepository;
+import ro.ubb.homeWorkLibrary.validators.Validator;
+import ro.ubb.homeWorkLibrary.exceptions.ValidatorException;
+
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +28,7 @@ public class ClientFileRepository extends InMemoryRepository<Long, Client> {
         loadData();
     }
 
-    private void loadData() {
+    private void loadData(){
         Path path = Paths.get(fileName);
 
         try {
@@ -38,12 +40,12 @@ public class ClientFileRepository extends InMemoryRepository<Long, Client> {
                 String surname = items.get((2));
                 int age = Integer.parseInt(items.get(3));
 
-                Client client = new Client(id,name,surname,age);
+                Client client = new Client(id, name, surname, age);
                 client.setId(id);
 
                 try {
                     super.save(client);
-                } catch (ValidatorException e) {
+                } catch (ValidatorException | DatabaseException e) {
                     e.printStackTrace();
                 }
             });
@@ -53,7 +55,7 @@ public class ClientFileRepository extends InMemoryRepository<Long, Client> {
     }
 
     @Override
-    public Optional<Client> save(Client entity) throws ValidatorException {
+    public Optional<Client> save(Client entity){
         Optional<Client> optional = super.save(entity);
         if (optional.isPresent()) {
             return optional;
@@ -75,18 +77,17 @@ public class ClientFileRepository extends InMemoryRepository<Long, Client> {
     }
 
     @Override
-    public Optional<Client> delete(Long id) {
-
+    public Optional<Client> delete(Long id){
         List<String> out = null;
-
         try {
             out = Files.lines(Paths.get(fileName))
                     .filter(line -> {
                         List<String> items = Arrays.asList(line.split(","));
-                        if (!items.get(0).equals(id.toString())){
+                        if (!items.get(0).equals(id.toString())) {
                             return true;
                         }
-                        return false;})
+                        return false;
+                    })
                     .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,19 +98,9 @@ public class ClientFileRepository extends InMemoryRepository<Long, Client> {
             e.printStackTrace();
         }
 
-
         super.delete(id);
         return Optional.empty();
     }
-
-//    public Optional<Client> deleteFromFile(Long id) throws ValidatorException {
-//        Optional<Client> optional = super.delete(id);
-//        if (optional.isPresent()) {
-//            return optional;
-//        }
-//        delete(id);
-//        return Optional.empty();
-//    }
 
 
     @Override

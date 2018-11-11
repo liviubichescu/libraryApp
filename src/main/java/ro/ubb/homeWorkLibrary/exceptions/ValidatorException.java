@@ -1,4 +1,4 @@
-package ro.ubb.homeWorkLibrary.Exceptions;
+package ro.ubb.homeWorkLibrary.exceptions;
 
 public class ValidatorException extends ProjectException {
 

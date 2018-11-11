@@ -1,8 +1,8 @@
-package ro.ubb.homeWorkLibrary.Service;
+package ro.ubb.homeWorkLibrary.service;
 
-import ro.ubb.homeWorkLibrary.Domain.Client;
-import ro.ubb.homeWorkLibrary.Exceptions.ValidatorException;
-import ro.ubb.homeWorkLibrary.Repository.Repository;
+import ro.ubb.homeWorkLibrary.domain.Client;
+import ro.ubb.homeWorkLibrary.repository.Repository;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,7 +16,7 @@ public class ServiceClienti {
         this.repository = repository;
     }
 
-    public void addClient(Client client)throws ValidatorException {
+    public void addClient(Client client) {
         repository.save(client);
     }
 
@@ -34,7 +34,22 @@ public class ServiceClienti {
         return filteredClients;
     }
 
-    public void removeClient(Long clientId){
+    public void removeClient(Long clientId) {
         repository.delete(clientId);
+    }
+
+    public void updateClientService(Client client) {
+        repository.update(client);
+    }
+
+
+    public Set<Client> findClient(Long id) {
+        Iterable<Client> clients = repository.findAll();
+        Set<Client> filteredClients = new HashSet<>();
+        clients.forEach(filteredClients::add);
+        filteredClients.removeIf(client -> client.getId() != id);
+
+        return filteredClients;
+
     }
 }
