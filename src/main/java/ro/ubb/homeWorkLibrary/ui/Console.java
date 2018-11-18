@@ -21,10 +21,6 @@ public class Console {
         this.serviceSales = serviceSales;
     }
 
-    public Console(ServiceBook serviceBook, ServiceClienti serviceClienti) {
-        this.serviceBook = serviceBook;
-        this.serviceClienti = serviceClienti;
-    }
 
     private void printMeniu() {
         System.out.println();
@@ -43,7 +39,7 @@ public class Console {
         System.out.println("11. Sterge Vanzare");
         System.out.println("12. Update Vanzare");
         System.out.println("13. Afiseaza toate vanzarile!");
-        System.out.println("14. Afiseaza cea mai vanduta carte!");
+        System.out.println("14. Best Seller!");
         System.out.println("0. Exit");
     }
 
@@ -264,28 +260,13 @@ public class Console {
             Long idCarte = scanner.nextLong();
             scanner.nextLine();
 
-            if (serviceBook.findBook(idCarte).size() <= 0) {
-                System.out.println("*** The book you are looking for was not found in the database! Please enter a valid ID book!!! ***");
-                return;
-            }
-
             System.out.print("Please enter the customer ID: ");
             Long idClient = scanner.nextLong();
             scanner.nextLine();
 
-            if (serviceClienti.findClient(idClient).size() <= 0) {
-                System.out.println("*** Your ID was not found in the database! Please enter a valid ID customer or register as a new one!!! ***");
-                return;
-            }
-
             Sales sale = new Sales(idCarte, idClient);
 
-            if (!serviceSales.checkSale(sale.getId())) {
-                serviceSales.addSales(sale);
-                System.out.println("***** Transaction has been succesful!!! *****");
-            } else {
-                System.out.println("***** Transaction failed!!! Client has already bought this book!!! *****");
-            }
+            serviceSales.addSales(sale);
 
         } catch (RuntimeException e) {
             throw new ConsoleException("Transaction failed! Please enter valid data!!!" + e);
@@ -305,14 +286,8 @@ public class Console {
             Long idClient = scanner.nextLong();
             scanner.nextLine();
 
-            Sales sale = new Sales(idCarte, idClient);
 
-            if (serviceSales.checkSale(sale.getId())) {
-                serviceSales.removeSale(sale.getId());
-                System.out.println("***** Sale removed!!! *****");
-            } else {
-                System.out.println("***** Removed failed!!! This sale is not in database!!! *****");
-            }
+            serviceSales.removeSale(idCarte.toString() + idClient.toString());
 
         } catch (RuntimeException e) {
             throw new ConsoleException("Transaction failed! Please enter valid data!!!" + e);
@@ -346,13 +321,14 @@ public class Console {
 //        }
     }
 
+    private void bestSeller() {
+        System.out.println(serviceSales.bestSeller());
+    }
+
     private void printAllSales() {
-        serviceSales.getAllSales().stream()
+        serviceSales.getAllSales()
                 .forEach(System.out::println);
     }
 
-    private void bestSeller() {
-        System.out.println(serviceBook.findBook(serviceSales.findMostCommon()));
-    }
 
 }

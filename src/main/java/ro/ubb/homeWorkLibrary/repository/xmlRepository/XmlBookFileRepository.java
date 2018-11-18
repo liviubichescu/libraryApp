@@ -1,4 +1,4 @@
-package ro.ubb.homeWorkLibrary.repository;
+package ro.ubb.homeWorkLibrary.repository.xmlRepository;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,11 +17,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-public class XmlFileRepository extends InMemoryRepository<Long, Book> {
+public class XmlBookFileRepository extends InMemoryRepository<Long, Book> {
 
     private String fileName;
 
-    public XmlFileRepository(Validator<Book> validator, String fileName) {
+    public XmlBookFileRepository(Validator<Book> validator, String fileName) {
         super(validator);
         this.fileName = fileName;
 

@@ -6,14 +6,17 @@ public class Sales extends BaseEntity<String> {
     private Long clientIdSale;
 
 
+    public Sales() {
+    }
+
     public Sales(Long bookIdSale, Long clientIdSale) {
-        super(bookIdSale.toString() + clientIdSale.toString());
+        super(bookIdSale.toString()+ clientIdSale.toString());
         this.bookIdSale = bookIdSale;
         this.clientIdSale = clientIdSale;
     }
 
     public Long getBookIdSale() {
-        return bookIdSale;
+            return bookIdSale;
     }
 
     public void setBookIdSale(Long bookIdSale) {
@@ -31,8 +34,7 @@ public class Sales extends BaseEntity<String> {
     @Override
     public String toString() {
         return "Sales{" +
-                "salesID=" + getId() +
-                ", bookIdSale=" + bookIdSale +
+                "bookIdSale=" + bookIdSale +
                 ", clientIdSale=" + clientIdSale +
                 '}';
     }

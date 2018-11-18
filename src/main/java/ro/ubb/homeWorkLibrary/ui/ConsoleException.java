@@ -1,4 +1,9 @@
 package ro.ubb.homeWorkLibrary.ui;
 
-public class ConsoleException {
+import ro.ubb.homeWorkLibrary.exceptions.ProjectException;
+
+public class ConsoleException extends ProjectException {
+    public ConsoleException(String message) {
+        super(message);
+    }
 }

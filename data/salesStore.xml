@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<salesStore>
+                            
+
+
+    
+    
+    
+    
+    <sale id="5552">
+                                        
+        
+        
+        
+        <id>5552</id>
+                                        
+        
+        
+        
+        <bookID>555</bookID>
+                                        
+        
+        
+        
+        <clientID>2</clientID>
+                                    
+    
+    
+    
+    </sale>
+                
+    
+    
+    
+    <sale id="5556">
+                                
+        
+        
+        <id>5556</id>
+                                
+        
+        
+        <bookID>555</bookID>
+                                
+        
+        
+        <clientID>6</clientID>
+                            
+    
+    
+    </sale>
+            
+    
+    
+    <sale id="6662">
+                        
+        
+        <id>6662</id>
+                        
+        
+        <bookID>666</bookID>
+                        
+        
+        <clientID>2</clientID>
+                    
+    
+    </sale>
+        
+    
+
+</salesStore>
