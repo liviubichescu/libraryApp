@@ -40,6 +40,8 @@ public class Console {
         System.out.println("12. Update Vanzare");
         System.out.println("13. Afiseaza toate vanzarile!");
         System.out.println("14. Best Seller!");
+        System.out.println("15. Book profit!");
+        System.out.println("16. Active clients!");
         System.out.println("0. Exit");
     }
 
@@ -92,6 +94,12 @@ public class Console {
                     break;
                 case 14:
                     bestSeller();
+                    break;
+                case 15:
+                    bookProfit();
+                    break;
+                case 16:
+                    activeClients();
                     break;
                 default:
                     System.out.println("This option is not yet implemented");
@@ -330,5 +338,33 @@ public class Console {
                 .forEach(System.out::println);
     }
 
+    private void bookProfit(){
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Introduceti cate carti care au adus profit sa se afiseze: ");
+        int nr = scanner.nextInt();
+        if (nr>serviceBook.getAllBooks().size()){
+            System.out.println("********   Numarul dat este mai mare decat numarul de carti din baza de date!!! Please try again!!!   *********");
+            System.out.println();
+            return;
+        }
+        for (int i=0;i<nr;i++){
+            System.out.println(serviceSales.bestProfit().get(i));
+        }
+    }
+
+    private void activeClients(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Introduceti cate clienti activi sa se afiseze: ");
+        int nr = scanner.nextInt();
+        if (nr>serviceClienti.getAllClients().size()){
+            System.out.println("********   Numarul dat este mai mare decat numarul de clienti din baza de date!!! Please try again!!!   *********");
+            System.out.println();
+            return;
+        }
+        for (int i=0;i<nr;i++){
+            System.out.println(serviceSales.addActiveClientsInList().get(i));
+        }
+    }
 }

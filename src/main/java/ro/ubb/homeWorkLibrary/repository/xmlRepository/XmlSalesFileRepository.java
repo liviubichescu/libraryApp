@@ -51,7 +51,6 @@ public class XmlSalesFileRepository extends InMemoryRepository<String, Sales> {
             Element root = document.getDocumentElement();
             root.appendChild(createSaleElement(document, sales));
 
-
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");

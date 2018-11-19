@@ -1,11 +1,11 @@
 package ro.ubb.homeWorkLibrary.service;
 
-public class BestSeller implements Comparable<BestSeller>{
+public class BestSellerBook {
 
     private Long bookId;
     private int numberOfSales;
 
-    public BestSeller(Long bookId, int numberOfSales) {
+    public BestSellerBook(Long bookId, int numberOfSales) {
         this.bookId = bookId;
         this.numberOfSales = numberOfSales;
     }
@@ -31,15 +31,5 @@ public class BestSeller implements Comparable<BestSeller>{
         return "Best Seller book has id= " + bookId +
                 " and a number of sales= " + numberOfSales +
                 ".";
-    }
-
-    @Override
-    public int compareTo(BestSeller o) {
-        if (this.getNumberOfSales() > o.getNumberOfSales())
-            return 1;
-        else if (this.getNumberOfSales() < o.getNumberOfSales())
-            return -1;
-        else
-            return 0;
     }
 }

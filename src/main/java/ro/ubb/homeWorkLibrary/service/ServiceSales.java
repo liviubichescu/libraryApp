@@ -4,46 +4,41 @@ import ro.ubb.homeWorkLibrary.domain.Book;
 import ro.ubb.homeWorkLibrary.domain.Client;
 import ro.ubb.homeWorkLibrary.domain.Sales;
 import ro.ubb.homeWorkLibrary.repository.Repository;
-
 import java.util.*;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class ServiceSales {
 
-    private Repository<String, Sales> repository;
-    private List<BestSeller> bestSellerList = new ArrayList<>();
+    private Repository<String, Sales> repositorySales;
+    private Repository<Long, Book> bookRepository;
+    private Repository<Long, Client> clientRepository;
+    private List<BestSellerBook> bestSellerBookList = new ArrayList<>();
 
-    public ServiceSales(Repository<String, Sales> repository) {
-        this.repository = repository;
+    public ServiceSales(Repository<String, Sales> repositorySales, Repository<Long, Book> bookRepository, Repository<Long, Client> clientRepository) {
+        this.clientRepository=clientRepository;
+        this.bookRepository = bookRepository;
+        this.repositorySales = repositorySales;
     }
 
     public void addSales(Sales sales) {
-        repository.save(sales);
+        repositorySales.save(sales);
     }
 
     public Set<Sales> getAllSales() {
-        Iterable<Sales> sales = repository.findAll();
+        Iterable<Sales> sales = repositorySales.findAll();
         return StreamSupport.stream(sales.spliterator(), false).collect(Collectors.toSet());
     }
 
     public boolean checkSale(String sale) {
-        Optional sales = repository.findOne(sale);
+        Optional sales = repositorySales.findOne(sale);
 
         return sales.isPresent();
     }
 
     public void removeSale(String bookClientsPK) {
-        repository.delete(bookClientsPK);
+        repositorySales.delete(bookClientsPK);
     }
-
-
-//    public void updateSaleService(Sales sale){
-//        repository.update(sale);
-//    }
 
     /**
      * metoda care pune intr-o lista toate id-urile de carti care s-au vandut
@@ -52,7 +47,7 @@ public class ServiceSales {
      */
     public List<Long> bookIdsThatWhereSold() {
         List<Long> bookIds = new ArrayList<>();
-        for (Sales s : repository.findAll()) {
+        for (Sales s : repositorySales.findAll()) {
             if (!bookIds.contains(s.getBookIdSale())) {
                 bookIds.add(s.getBookIdSale());
             }
@@ -69,7 +64,7 @@ public class ServiceSales {
      */
     public int competeCount(Long bId) {
         int countNrAparitii = 0;
-        for (Sales s : repository.findAll()) {
+        for (Sales s : repositorySales.findAll()) {
             if (s.getBookIdSale().equals(bId)) {
                 countNrAparitii++;
             }
@@ -78,33 +73,128 @@ public class ServiceSales {
     }
 
     /**
-     * Metoda adauga intr-o lista de tip BestSeller toate vanzarile grupare dupa id-ul cartii vandute.
+     * Metoda adauga intr-o lista de tip BestSellerBook toate vanzarile grupate dupa id-ul cartii vandute.
      * Sorteaza lista in ordinea numarului de carti vandute.
      *
      * @return returneaza best sellerul cu cele mai multe vanzari( de pe pozitia 0);
      */
-    public BestSeller bestSeller() {
-        ArrayList<BestSeller> bsArray = new ArrayList<>();
+    public BestSellerBook bestSeller() {
+        ArrayList<BestSellerBook> bsArray = new ArrayList<>();
         for (Long bs : bookIdsThatWhereSold()) {
             int count = competeCount(bs);
-            bestSellerList.add(new BestSeller(bs, count));
+            bestSellerBookList.add(new BestSellerBook(bs, count));
         }
-        bestSellerList.sort(Comparator.comparing(BestSeller::getNumberOfSales));
-        Collections.reverse(bestSellerList);
+        bestSellerBookList.sort(Comparator.comparing(BestSellerBook::getNumberOfSales));
+        Collections.reverse(bestSellerBookList);
 
-//        for (int i=0;i<bestSellerList.size();i++){
-//            if (bestSellerList.get(0).getNumberOfSales()== bestSellerList.get(1).getNumberOfSales()){
-//                bsArray.add(bestSellerList.get(0));
-//                bsArray.add(bestSellerList.get(1));
-//            }
-//            if (bestSellerList.get(0).getNumberOfSales()== bestSellerList.get(1).getNumberOfSales()){
-//                bsArray.add(bestSellerList.get(0));
-//                bsArray.add(bestSellerList.get(1));
-//            }
-//        }
-
-        return bestSellerList.get(0);
+        return bestSellerBookList.get(0);
     }
+
+
+
+    /**
+     * Metoda adauga intr-o lista de tip BestSellerBook toate vanzarile grupate dupa id-ul cartii vandute.
+     * Sorteaza lista in ordinea numarului de carti vandute.
+     *
+     * @return returneaza o lista de bestSeller-uri(cu id-ul cartii si numarul de vanzari)
+     */
+    public List<BestSellerBook> mostSoldBooks() {
+        List<BestSellerBook> bsArray = new ArrayList<>();
+        for (Long bs : bookIdsThatWhereSold()) {
+            int count = competeCount(bs);
+            bsArray.add(new BestSellerBook(bs, count));
+        }
+        return bsArray;
+    }
+
+    /**
+     * Metoda primeste ca parametru o carte
+     * Ia toata lista de carti cu numarul de bucati vandute
+     * Calculeaza profitul pentru cartea data ca parametru pe baza numarului de carti vandute
+     *
+     * returneaza profitul
+     */
+    public BestProfit calcProfitForBook(Book book){
+        double profit=0;
+        String title="";
+        List<BestSellerBook> soldBooks = mostSoldBooks();
+        for (BestSellerBook bs : soldBooks) {
+            if (bs.getBookId().equals(book.getId())){
+                profit = bs.getNumberOfSales()* book.getPrice();
+                title = book.getTitle();
+            }
+        }
+        BestProfit bestProfit = new BestProfit(title,profit);
+        return bestProfit;
+    }
+
+    // Radu version
+    public BestProfit calcProfitForBookRaduVersion(Book book){
+
+        int c = competeCount(book.getId());
+        return new BestProfit(book.getTitle(),(book.getPrice()*c));
+    }
+
+    /**
+     * Metoda adauga intr-o lista de BestProfit(titlul si profitul unei carti) un best profit
+     */
+    public List<BestProfit> bestProfit (){
+        List<BestProfit> profitList = new ArrayList<>();
+        Iterable<Book> sales = bookRepository.findAll();
+        for (Book book: sales){
+            profitList.add(calcProfitForBookRaduVersion(book));
+        }
+        profitList.sort(Comparator.comparing(BestProfit::getProfit));
+        Collections.reverse(profitList);
+
+        return profitList;
+    }
+
+
+    /**
+     * Se citeste un numar nr.
+     * Sa se afiseze clientii care au cumparat cele mai multe carti intr-o lista de forma
+     * <nume-client> <numar-carti-cumparate>
+     * sortata alfabetic dupa <nume-client>.
+     */
+
+
+    public int howManyBooksClientsBought(Long clientID) {
+        int countNrCartiCumparate = 0;
+        for (Sales s : repositorySales.findAll()) {
+            if (s.getClientIdSale().equals(clientID)) {
+                countNrCartiCumparate++;
+            }
+        }
+        return countNrCartiCumparate;
+    }
+    /**
+     * Metoda primeste ca parametru un client
+     * Ia toata lista de clienti si calculeaza cate carti a cumparat fiecare client si ne returneaza un Active client
+     *
+     */
+    public ActiveClients makeClientAsActiveClient(Client client){
+
+        int cartiCump = howManyBooksClientsBought(client.getId());
+        return new ActiveClients(client.getName(),cartiCump);
+    }
+
+    /*
+     * creez o lista de clienti activi
+     */
+    public List<ActiveClients> addActiveClientsInList (){
+        List<ActiveClients> activeClients = new ArrayList<>();
+        Iterable<Client> clients = clientRepository.findAll();
+        for (Client client: clients){
+            activeClients.add(makeClientAsActiveClient(client));
+        }
+        activeClients.sort(Comparator.comparing(ActiveClients::getNumeClient));
+//        Collections.reverse(profitList);
+
+        return activeClients;
+    }
+
+
 
 
 }

@@ -7,13 +7,6 @@ import ro.ubb.homeWorkLibrary.repository.Repository;
 import ro.ubb.homeWorkLibrary.repository.databaseRepo.BookDatabaseRepository;
 import ro.ubb.homeWorkLibrary.repository.databaseRepo.ClientDatabaseRepository;
 import ro.ubb.homeWorkLibrary.repository.databaseRepo.SalesDatabaseRepository;
-import ro.ubb.homeWorkLibrary.repository.fileRepo.BookFileRepository;
-import ro.ubb.homeWorkLibrary.repository.fileRepo.ClientFileRepository;
-import ro.ubb.homeWorkLibrary.repository.fileRepo.SalesFileRepository;
-import ro.ubb.homeWorkLibrary.repository.inMemoryRepo.InMemoryRepository;
-import ro.ubb.homeWorkLibrary.repository.xmlRepository.XmlBookFileRepository;
-import ro.ubb.homeWorkLibrary.repository.xmlRepository.XmlSalesFileRepository;
-import ro.ubb.homeWorkLibrary.service.BestSeller;
 import ro.ubb.homeWorkLibrary.service.ServiceBook;
 import ro.ubb.homeWorkLibrary.service.ServiceClienti;
 import ro.ubb.homeWorkLibrary.service.ServiceSales;
@@ -124,12 +117,15 @@ public class Main {
         Repository<String, Sales> salesRepository = new SalesDatabaseRepository(salesValidator);
         ServiceBook serviceBook2 = new ServiceBook(bookRepository);
         ServiceClienti serviceClienti2 = new ServiceClienti(clientRepository);
-        ServiceSales serviceSales = new ServiceSales(salesRepository);
+        ServiceSales serviceSales = new ServiceSales(salesRepository, bookRepository,clientRepository);
         Console console2 = new Console(serviceBook2, serviceClienti2,serviceSales);
         console2.meniu();
 
 
-
+        serviceSales.addActiveClientsInList().forEach(System.out::println);
+//        serviceSales.mostSoldBooks().forEach(System.out::println);
+//        serviceSales.bestProfit().forEach(System.out::println);
+//        console2.bookProfit();
 
 //        List<Book> books = loadBooks();
 //        books.forEach(System.out::println);
